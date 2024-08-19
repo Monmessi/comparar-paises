@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparación de Países</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+    <h1>Comparación de Países</h1>
+    <form method="POST">
+        <label for="pais1">Primer País:</label>
+        <input type="text" id="pais1" name="pais1" required>
+        <br>
+        <label for="pais2">Segundo País:</label>
+        <input type="text" id="pais2" name="pais2" required>
+        <br>
+        <input type="submit" value="Comparar">
+    </form>
+    {% if error %}
+    <p>{{ error }}</p>
+    {% elif data %}
+    <table border="1">
+        <tr>
+            <th>Atributo</th>
+            <th>{{ pais1 }}</th>
+            <th>{{ pais2 }}</th>
+        </tr>
+        {% for row in data %}
+        <tr>
+            <td>{{ row[0] }}</td>
+            <td>{{ row[1]|safe }}</td>
+            <td>{{ row[2]|safe }}</td>
+        </tr>
+
+        {% endfor %}
+    </table>
+    {% endif %}
+</body>
+
+</html>
